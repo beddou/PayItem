@@ -1,20 +1,20 @@
-package com.pay.payItem.business;
+package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.pay.payItem.model.Rubric;
-import com.pay.payItem.repository.RubricRepository;
-import com.pay.payItem.repository.VariableRepository;
+import com.pay.payitem.model.Rubric;
+import com.pay.payitem.repository.RubricRepository;
+import com.pay.payitem.repository.VariableRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RubricBusiness {
-    @Autowired 
+    @Autowired
     private RubricRepository rubricRepository;
-    @Autowired 
+    @Autowired
     private VariableRepository variableRepository;
 
     public List<Rubric> getRubricsOfOrganism(int idOrganism) {
@@ -22,7 +22,7 @@ public class RubricBusiness {
     }
 
     public List<Rubric> getRubricsOfOrganismCreatedByUser(int idOrganism) {
-        return rubricRepository.findByOrganismAndSystemcreated(idOrganism, false);
+        return rubricRepository.findByOrganismAndSystemCreated(idOrganism, false);
     }
 
     public Optional<Rubric> getRubricOfOrganismByCode(int idOrganism, int code) {
@@ -41,42 +41,41 @@ public class RubricBusiness {
 
     public Rubric updateRubric(int id, Rubric rubric) {
         Rubric rubric1 = rubricRepository.findById(id).get();
-        
+
         if (rubric.getCode() > 0)
             rubric1.setCode(rubric.getCode());
-        if (rubric.getDesign() != null)
+
+        if (rubric.getDesign() != null && !rubric.getDesign().equals("") && !rubric.getDesign().trim().equals(""))
             rubric1.setDesign(rubric.getDesign());
         if (rubric.isDeduction() != rubric1.isDeduction())
             rubric1.setDeduction(rubric.isDeduction());
 
-            if (rubric.isRetainedOfAbsence() != rubric1.isRetainedOfAbsence())
+        if (rubric.isRetainedOfAbsence() != rubric1.isRetainedOfAbsence())
             rubric1.setRetainedOfAbsence(rubric.isRetainedOfAbsence());
 
-            if (rubric.isSubjectIRG() != rubric1.isSubjectIRG())
+        if (rubric.isSubjectIRG() != rubric1.isSubjectIRG())
             rubric1.setSubjectIRG(rubric.isSubjectIRG());
 
-            if (rubric.isSubjectSS() != rubric1.isSubjectSS())
+        if (rubric.isSubjectSS() != rubric1.isSubjectSS())
             rubric1.setSubjectSS(rubric.isSubjectSS());
 
-            if(rubric.getValueType()!=null)
+        if (rubric.getValueType() != null)
             rubric1.setValueType(rubric.getValueType());
 
-            if(rubric.getMatrixColumnNumber()>0)
+        if (rubric.getMatrixColumnNumber() > 0)
             rubric1.setMatrixColumnNumber(rubric.getMatrixColumnNumber());
-            
 
         return rubricRepository.save(rubric1);
 
     }
 
     public boolean deleteRubric(int idRubric) {
-        if (!variableRepository.existByRubric(idRubric)) {
+        if (!variableRepository.existsVariableByRubric(idRubric)) {
             rubricRepository.deleteById(idRubric);
             return true;
         } else
             return false;
 
     }
-}
-    
+
 }

@@ -1,8 +1,8 @@
-package com.pay.payItem.repository;
+package com.pay.payitem.repository;
 
 import java.util.List;
 
-import com.pay.payItem.model.Rubric;
+import com.pay.payitem.model.Rubric;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RubricRepository extends JpaRepository<Rubric, Integer> {
 
-    boolean existByArticle(int idArticle);
+    boolean existsRubricByArticle(int idArticle);
     List<Rubric> findByOrganism(int idOrganism);
-    List<Rubric> findByOrganismAndSystemcreated(int idOrganism, boolean systemCreated);
-    List<Rubric> findByOrganismAndSystemmanaged(int idOrganism, boolean systemManaged);
+    List<Rubric> findByOrganismAndSystemCreated(int idOrganism, boolean systemCreated);
+    List<Rubric> findByOrganismAndSystemManaged(int idOrganism, boolean systemManaged);
     List<Rubric> findByOrganismAndCode(int idOrganism, int code);
     
 }

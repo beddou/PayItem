@@ -1,4 +1,4 @@
-package com.pay.payItem.model;
+package com.pay.payitem.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.pay.payItem.model.tools.ValueType;
+import com.pay.payitem.model.tools.ValueType;
 
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueRubric", columnNames = { "organism", "code" }) })
 public class Rubric {
 
     @Id

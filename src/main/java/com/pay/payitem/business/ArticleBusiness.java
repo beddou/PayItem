@@ -1,12 +1,11 @@
-package com.pay.payItem.business;
+package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.pay.payItem.model.Article;
-import com.pay.payItem.model.article;
-import com.pay.payItem.repository.ArticleRepository;
-import com.pay.payItem.repository.RubricRepository;
+import com.pay.payitem.model.Article;
+import com.pay.payitem.repository.ArticleRepository;
+import com.pay.payitem.repository.RubricRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class ArticleBusiness {
     }
 
     public List<Article> getArticlesOfOrganismCreatedByUser(int idOrganism) {
-        return articleRepository.findByOrganismAndSystemcreated(idOrganism, false);
+        return articleRepository.findByOrganismAndSystemCreated(idOrganism, false);
     }
 
     public Optional<Article> getArticleOfOrganismByCode(int idOrganism, int code) {
@@ -53,7 +52,7 @@ public class ArticleBusiness {
     }
 
     public boolean deleteArticle(int idArticle) {
-        if (!rubricRepository.existByArticle(idArticle)) {
+        if (!rubricRepository.existsRubricByArticle(idArticle)) {
             articleRepository.deleteById(idArticle);
             return true;
         } else

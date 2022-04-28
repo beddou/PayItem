@@ -1,11 +1,11 @@
-package com.pay.payItem.business;
+package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.pay.payItem.model.Chapter;
-import com.pay.payItem.repository.ArticleRepository;
-import com.pay.payItem.repository.ChapterRepository;
+import com.pay.payitem.model.Chapter;
+import com.pay.payitem.repository.ArticleRepository;
+import com.pay.payitem.repository.ChapterRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ChapterBusiness {
     }
 
     public List<Chapter> getChaptersOfOrganismCreatedByUser(int idOrganism) {
-        return chapterRepository.findByOrganismAndSystemcreated(idOrganism, false);
+        return chapterRepository.findByOrganismAndSystemCreated(idOrganism, false);
     }
 
     public Optional<Chapter> getChaptersOfOrganismByCode(int idOrganism, int code) {
@@ -54,7 +54,7 @@ public class ChapterBusiness {
     }
 
     public boolean deleteChapter(int idChapter) {
-        if (!articleRepository.existByChapter(idChapter)) {
+        if (!articleRepository.existsArticleByChapter(idChapter)) {
             chapterRepository.deleteById(idChapter);
             return true;
         } else
