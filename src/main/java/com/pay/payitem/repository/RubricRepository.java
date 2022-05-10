@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RubricRepository extends JpaRepository<Rubric, Integer> {
 
-    boolean existsRubricByArticle(int idArticle);
+    boolean existsByArticle_id(int idArticle);
     List<Rubric> findByOrganism(int idOrganism);
     List<Rubric> findByOrganismAndSystemCreated(int idOrganism, boolean systemCreated);
     List<Rubric> findByOrganismAndSystemManaged(int idOrganism, boolean systemManaged);

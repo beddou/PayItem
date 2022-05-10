@@ -2,8 +2,11 @@ package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import com.pay.payitem.model.Article;
 import com.pay.payitem.model.Rubric;
+import com.pay.payitem.repository.ArticleRepository;
 import com.pay.payitem.repository.RubricRepository;
 import com.pay.payitem.repository.VariableRepository;
 
@@ -16,6 +19,16 @@ public class RubricBusiness {
     private RubricRepository rubricRepository;
     @Autowired
     private VariableRepository variableRepository;
+    @Autowired
+    private ArticleRepository articleRepository;
+
+    public Optional<Rubric> getRubric(int idRubric) {
+        return rubricRepository.findById(idRubric);
+    }
+
+    public Rubric findRubric(int idRubric) {
+        return rubricRepository.getById(idRubric);
+    }
 
     public List<Rubric> getRubricsOfOrganism(int idOrganism) {
         return rubricRepository.findByOrganism(idOrganism);
@@ -23,6 +36,10 @@ public class RubricBusiness {
 
     public List<Rubric> getRubricsOfOrganismCreatedByUser(int idOrganism) {
         return rubricRepository.findByOrganismAndSystemCreated(idOrganism, false);
+    }
+
+    public List<Rubric> getRubricsOfOrganismManagedByUser(int idOrganism) {
+        return rubricRepository.findByOrganismAndSystemManaged(idOrganism, false);
     }
 
     public Optional<Rubric> getRubricOfOrganismByCode(int idOrganism, int code) {
@@ -36,7 +53,11 @@ public class RubricBusiness {
     public Rubric createRubric(Rubric rubric) {
         rubric.setSystemCreated(false);
         rubric.setSystemManaged(false);
-        return rubricRepository.save(rubric);
+        Rubric rubric1 = rubricRepository.save(rubric);
+        int id = rubric1.getArticle().getId();
+        Article article = articleRepository.findById(id).get();
+        rubric1.setArticle(article);
+        return rubric1;
     }
 
     public Rubric updateRubric(int id, Rubric rubric) {
@@ -64,6 +85,14 @@ public class RubricBusiness {
 
         if (rubric.getMatrixColumnNumber() > 0)
             rubric1.setMatrixColumnNumber(rubric.getMatrixColumnNumber());
+
+        if (rubric.getArticle() != null) {
+            int idArticle = rubric.getArticle().getId();
+            if (idArticle > 0) {
+                Article article = articleRepository.findById(idArticle).get();
+                rubric1.setArticle(article);
+            }
+        }
 
         return rubricRepository.save(rubric1);
 

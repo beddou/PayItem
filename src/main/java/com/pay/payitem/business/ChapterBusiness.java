@@ -18,6 +18,10 @@ public class ChapterBusiness {
     @Autowired
     private ArticleRepository articleRepository;
 
+    public Optional<Chapter> getChapter(int idChapter) {
+        return chapterRepository.findById(idChapter);
+    }
+
     public List<Chapter> getChaptersOfOrganism(int idOrganism) {
         return chapterRepository.findByOrganism(idOrganism);
     }
@@ -26,7 +30,7 @@ public class ChapterBusiness {
         return chapterRepository.findByOrganismAndSystemCreated(idOrganism, false);
     }
 
-    public Optional<Chapter> getChaptersOfOrganismByCode(int idOrganism, int code) {
+    public Optional<Chapter> getChaptersOfOrganismByCode(int code, int idOrganism) {
         List<Chapter> list = chapterRepository.findByOrganismAndCode(idOrganism, code);
         if (!list.isEmpty()) {
             return Optional.of(list.get(0));
@@ -42,19 +46,25 @@ public class ChapterBusiness {
 
     public Chapter updateChapter(int id, Chapter chapter) {
         Chapter chapter1 = chapterRepository.findById(id).get();
-       
+
         if (chapter.getCode() > 0)
             chapter1.setCode(chapter.getCode());
-        if (chapter.getDesign() != null)
+            
+        if (chapter.getDesign() != null && !chapter.getDesign().equals("")
+                && !chapter.getDesign().trim().equals(""))
+
             chapter1.setDesign(chapter.getDesign());
-        if (chapter.getDescription() != null)
+
+        if (chapter.getDescription() != null && !chapter.getDescription().equals("")
+                && !chapter.getDescription().trim().equals(""))
+
             chapter1.setDescription(chapter.getDescription());
         return chapterRepository.save(chapter1);
 
     }
 
     public boolean deleteChapter(int idChapter) {
-        if (!articleRepository.existsArticleByChapter(idChapter)) {
+        if (!articleRepository.existsByChapter_id(idChapter)) {
             chapterRepository.deleteById(idChapter);
             return true;
         } else

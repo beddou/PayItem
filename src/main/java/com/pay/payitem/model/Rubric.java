@@ -4,9 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -17,7 +19,8 @@ import javax.validation.constraints.NotNull;
 import com.pay.payitem.model.tools.ValueType;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueRubric", columnNames = { "organism", "code" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueRubric", columnNames = { "organism", "code" }),
+        @UniqueConstraint(name = "UniqueMatrixColumnNumber", columnNames = { "organism", "matrixColumnNumber" }) })
 public class Rubric {
 
     @Id
@@ -56,6 +59,8 @@ public class Rubric {
     private int matrixColumnNumber;
 
     @ManyToOne
+
+   // @JoinColumn(name = "article_id", referencedColumnName = "id", insertable = false, updatable = true)
     private Article article;
 
     @NotNull
@@ -63,6 +68,15 @@ public class Rubric {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Rubric [article=" + article + ", code=" + code + ", deduction=" + deduction + ", design=" + design
+                + ", id=" + id + ", matrixColumnNumber=" + matrixColumnNumber + ", organism=" + organism
+                + ", retainedOfAbsence=" + retainedOfAbsence + ", subjectIRG=" + subjectIRG + ", subjectSS=" + subjectSS
+                + ", systemCreated=" + systemCreated + ", systemManaged=" + systemManaged + ", valueType=" + valueType
+                + "]";
     }
 
     public void setId(int id) {
@@ -164,7 +178,5 @@ public class Rubric {
     public void setOrganism(int organism) {
         this.organism = organism;
     }
-
-    
 
 }

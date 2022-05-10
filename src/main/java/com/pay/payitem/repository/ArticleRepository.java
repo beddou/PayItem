@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
-    boolean existsArticleByChapter(int idChapter);
+    boolean existsByChapter_id(int idChapter);
     List<Article> findByOrganism(int idOrganism);
     List<Article> findByOrganismAndSystemCreated(int idOrganism, boolean systemCreated);
     List<Article> findByOrganismAndCode(int idOrganism, int code);
