@@ -99,7 +99,7 @@ public class RubricBusiness {
     }
 
     public boolean deleteRubric(int idRubric) {
-        if (!variableRepository.existsVariableByRubric(idRubric)) {
+        if (!variableRepository.existsByRubric_id(idRubric)) {
             rubricRepository.deleteById(idRubric);
             return true;
         } else

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VariableRepository extends JpaRepository<Variable, Integer>{
 
-    boolean existsVariableByRubric(int idRubric);
+    boolean existsByRubric_id(int idRubric);
     List<Variable> findBySalaried(int idSalaried);
 
     

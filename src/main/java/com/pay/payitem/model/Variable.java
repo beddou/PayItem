@@ -21,6 +21,7 @@ public class Variable {
     private float value;
 
     @ManyToOne
+    @NotNull
     private Rubric rubric;
 
     @NotNull
