@@ -39,9 +39,9 @@ public class VariableController {
     }
 
     @PostMapping(value = "/PayItem/Variable/create")
-    public ResponseEntity<Variable> createVariable(@RequestBody Variable Variable) {
+    public ResponseEntity<Variable> createVariable(@RequestBody Variable variable) {
         try {
-            Variable variable1 = variableBusiness.createVariable(Variable);
+            Variable variable1 = variableBusiness.createVariable(variable);
             return new ResponseEntity<>(variable1, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new NoEntityAddedException(variableNotSaved);
