@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -63,7 +64,7 @@ public class Rubric {
    // @JoinColumn(name = "article_id", referencedColumnName = "id", insertable = false, updatable = true)
     private Article article;
 
-    @NotNull
+    @Min(value = 1, message = "organism must be input")    
     private int organism;
 
     public int getId() {

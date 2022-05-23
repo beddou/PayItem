@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -40,8 +41,9 @@ public class Article {
     
     private Chapter chapter;
 
-    @NotNull
+    @Min(value = 1, message = "organism must be input")    
     private int organism;
+    
 
    // @OneToMany(targetEntity=Rubric.class, mappedBy="article", fetch = FetchType.LAZY)   
    //@JsonIgnore 

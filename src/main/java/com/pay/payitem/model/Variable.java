@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,7 +25,7 @@ public class Variable {
     @NotNull
     private Rubric rubric;
 
-    @NotNull
+    @Min(value = 1, message = "organism must be input")
     private int salaried;
 
     public int getId() {
