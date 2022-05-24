@@ -76,7 +76,7 @@ public class ArticleController {
 
     }
 
-    @PostMapping(value = "/PayItem/Article/create")
+    @PostMapping(value = "/PayItem/Article/Create")
     public ResponseEntity<Article> createArticle(@RequestBody Article article) {
         try {
             Article article1 = articleBusiness.createArticle(article);
@@ -87,7 +87,7 @@ public class ArticleController {
 
     }
 
-    @PutMapping(value = "/PayItem/Article/update/{idArticle}")
+    @PutMapping(value = "/PayItem/Article/Update/{idArticle}")
     public ResponseEntity<Article> upDateArticle(@PathVariable("idArticle") int idArticle,
             @RequestBody Article article) {
 
@@ -110,7 +110,7 @@ public class ArticleController {
 
     }
 
-    @DeleteMapping(value = "/PayItem/Article/delete/{idArticle}")
+    @DeleteMapping(value = "/PayItem/Article/Delete/{idArticle}")
 
     public ResponseEntity<Boolean> deleteArticle(@PathVariable("idArticle") int idArticle) {
 

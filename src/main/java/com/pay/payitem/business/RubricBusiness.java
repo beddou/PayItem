@@ -68,16 +68,17 @@ public class RubricBusiness {
 
         if (rubric.getDesign() != null && !rubric.getDesign().equals("") && !rubric.getDesign().trim().equals(""))
             rubric1.setDesign(rubric.getDesign());
-        if (rubric.isDeduction() != rubric1.isDeduction())
+
+        if (rubric.isDeduction() != null)
             rubric1.setDeduction(rubric.isDeduction());
 
-        if (rubric.isRetainedOfAbsence() != rubric1.isRetainedOfAbsence())
+        if (rubric.isRetainedOfAbsence() != null)
             rubric1.setRetainedOfAbsence(rubric.isRetainedOfAbsence());
 
-        if (rubric.isSubjectIRG() != rubric1.isSubjectIRG())
+        if (rubric.isSubjectIRG() != null)
             rubric1.setSubjectIRG(rubric.isSubjectIRG());
 
-        if (rubric.isSubjectSS() != rubric1.isSubjectSS())
+        if (rubric.isSubjectSS() != null)
             rubric1.setSubjectSS(rubric.isSubjectSS());
 
         if (rubric.getValueType() != null)

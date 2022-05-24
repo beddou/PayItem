@@ -39,8 +39,9 @@ public class Rubric {
     @Enumerated(EnumType.STRING)
     private ValueType valueType;
 
-    @Column(columnDefinition = "boolean default false")
-    private boolean deduction;
+   
+    @NotNull
+    private Boolean deduction;
 
     @Column(columnDefinition = "boolean default true")
     private boolean systemCreated;
@@ -48,20 +49,18 @@ public class Rubric {
     @Column(columnDefinition = "boolean default true")
     private boolean systemManaged;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean subjectIRG;
+    @NotNull
+    private Boolean subjectIRG;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean subjectSS;
+    @NotNull
+    private Boolean subjectSS;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean retainedOfAbsence;
+    @NotNull
+    private Boolean retainedOfAbsence;
 
     private int matrixColumnNumber;
 
     @ManyToOne
-
-   // @JoinColumn(name = "article_id", referencedColumnName = "id", insertable = false, updatable = true)
     private Article article;
 
     @Min(value = 1, message = "organism must be input")    
@@ -108,11 +107,11 @@ public class Rubric {
         this.valueType = valueType;
     }
 
-    public boolean isDeduction() {
+    public Boolean isDeduction() {
         return deduction;
     }
 
-    public void setDeduction(boolean deduction) {
+    public void setDeduction(Boolean deduction) {
         this.deduction = deduction;
     }
 
@@ -132,27 +131,27 @@ public class Rubric {
         this.systemManaged = systemManaged;
     }
 
-    public boolean isSubjectIRG() {
+    public Boolean isSubjectIRG() {
         return subjectIRG;
     }
 
-    public void setSubjectIRG(boolean subjectIRG) {
+    public void setSubjectIRG(Boolean subjectIRG) {
         this.subjectIRG = subjectIRG;
     }
 
-    public boolean isSubjectSS() {
+    public Boolean isSubjectSS() {
         return subjectSS;
     }
 
-    public void setSubjectSS(boolean subjectSS) {
+    public void setSubjectSS(Boolean subjectSS) {
         this.subjectSS = subjectSS;
     }
 
-    public boolean isRetainedOfAbsence() {
+    public Boolean isRetainedOfAbsence() {
         return retainedOfAbsence;
     }
 
-    public void setRetainedOfAbsence(boolean retainedOfAbsence) {
+    public void setRetainedOfAbsence(Boolean retainedOfAbsence) {
         this.retainedOfAbsence = retainedOfAbsence;
     }
 
