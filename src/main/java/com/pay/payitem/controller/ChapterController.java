@@ -1,6 +1,6 @@
 package com.pay.payitem.controller;
 
-import java.time.chrono.ChronoPeriod;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class ChapterController {
     @Autowired
     private ChapterBusiness chapterBusiness;
 
-    @GetMapping(value = "/PayItem/Chapter/getChaptersOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Chapter/All/{idOrganism}")
     public List<Chapter> getChaptersOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Chapter> chapters = chapterBusiness.getChaptersOfOrganism(idOrganism);
         if (chapters.isEmpty()) {
@@ -37,7 +37,7 @@ public class ChapterController {
 
     }
 
-    @GetMapping(value = "/PayItem/Chapter/getChaptersCreatedByUserOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Chapter/GetCreatedByUser/{idOrganism}")
     public List<Chapter> getChaptersCreatedByUserOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Chapter> chapters = chapterBusiness.getChaptersOfOrganismCreatedByUser(idOrganism);
         if (chapters.isEmpty()) {
@@ -47,7 +47,7 @@ public class ChapterController {
 
     }
 
-    @GetMapping(value = "/PayItem/Chapter/getChaptersByCodeOfOrganism/{code}/{idOrganism}")
+    @GetMapping(value = "/PayItem/Chapter/GetByCode/{code}/{idOrganism}")
     public ResponseEntity<Chapter> getChaptersByCodeOfOrganism(@PathVariable("code") int code,
             @PathVariable("idOrganism") int idOrganism) {
         Optional<Chapter> chapter = chapterBusiness.getChaptersOfOrganismByCode(code, idOrganism);
@@ -62,7 +62,7 @@ public class ChapterController {
 
     }
 
-    @PostMapping(value = "/PayItem/Chapter/create")
+    @PostMapping(value = "/PayItem/Chapter/Create")
     public ResponseEntity<Chapter> createChapter(@RequestBody Chapter chapter) {
         try {
             Chapter chapter1 = chapterBusiness.createChapter(chapter);
@@ -73,7 +73,7 @@ public class ChapterController {
 
     }
 
-    @PutMapping(value = "/PayItem/Chapter/update/{idChapter}")
+    @PutMapping(value = "/PayItem/Chapter/Update/{idChapter}")
     public ResponseEntity<Chapter> upDateChapter(@PathVariable("idChapter") int idChapter,
             @RequestBody Chapter chapter) {
 
@@ -96,15 +96,15 @@ public class ChapterController {
 
     }
 
-    @DeleteMapping(value = "/PayItem/Chapter/delete/{idChapter}")
+    @DeleteMapping(value = "/PayItem/Chapter/Delete/{idChapter}")
 
     public ResponseEntity<Boolean> deleteChapter(@PathVariable("idChapter") int idChapter) {
 
-        Optional<Chapter> chapter =  chapterBusiness.getChapter(idChapter);
+        Optional<Chapter> chapter = chapterBusiness.getChapter(idChapter);
         if (!chapter.isPresent())
             throw new EntityNotFoundException("entity introuvable");
 
-        return new ResponseEntity<>( chapterBusiness.deleteChapter(idChapter), HttpStatus.OK);
+        return new ResponseEntity<>(chapterBusiness.deleteChapter(idChapter), HttpStatus.OK);
 
     }
 

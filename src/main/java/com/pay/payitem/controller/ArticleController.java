@@ -26,7 +26,7 @@ public class ArticleController {
     @Autowired
     private ArticleBusiness articleBusiness;
 
-    @GetMapping(value = "/PayItem/Article/get/{id}")
+    @GetMapping(value = "/PayItem/Article/Get/{id}")
     public ResponseEntity<Article> getArticle(@PathVariable("id") int id) {
         Optional<Article> article = articleBusiness.getArticle(id);
         if (article.isPresent()) {
@@ -41,7 +41,7 @@ public class ArticleController {
     }
 
 
-    @GetMapping(value = "/PayItem/Article/getArticlesOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Article/All/{idOrganism}")
     public List<Article> getArticlesOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Article> articles = articleBusiness.getArticlesOfOrganism(idOrganism);
         if (articles.isEmpty()) {
@@ -51,7 +51,7 @@ public class ArticleController {
 
     }
 
-    @GetMapping(value = "/PayItem/Article/getArticlesCreatedByUserOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Article/GetCreatedByUser/{idOrganism}")
     public List<Article> getArticlesCreatedByUserOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Article> articles = articleBusiness.getArticlesOfOrganismCreatedByUser(idOrganism);
         if (articles.isEmpty()) {
@@ -61,7 +61,7 @@ public class ArticleController {
 
     }
 
-    @GetMapping(value = "/PayItem/Article/getArticlesByCodeOfOrganism/{code}/{idOrganism}")
+    @GetMapping(value = "/PayItem/Article/GetByCode/{code}/{idOrganism}")
     public ResponseEntity<Article> getArticlesByCodeOfOrganism(@PathVariable("code") int code,
             @PathVariable("idOrganism") int idOrganism) {
         Optional<Article> article = articleBusiness.getArticleOfOrganismByCode(idOrganism, code);
@@ -96,8 +96,8 @@ public class ArticleController {
         if (article1.isPresent()) {
             try {
 
-                Article Article2 = articleBusiness.updateArticle(idArticle, article);
-                return new ResponseEntity<>(Article2, HttpStatus.CREATED);
+                Article article2 = articleBusiness.updateArticle(idArticle, article);
+                return new ResponseEntity<>(article2, HttpStatus.CREATED);
 
             } catch (Exception e) {
                 throw new NoEntityAddedException("entity not saved");

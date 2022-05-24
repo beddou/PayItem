@@ -28,7 +28,7 @@ public class RubricController {
     private String rubricNotFound = "rubric not found"; 
     private String rubricNotSaved = "rubric not saved";
 
-    @GetMapping(value = "/PayItem/Rubric/get/{id}")
+    @GetMapping(value = "/PayItem/Rubric/Get/{id}")
     public ResponseEntity<Rubric> getRubric(@PathVariable("id") int id) {
         Optional<Rubric> rubric = rubricBusiness.getRubric(id);
         if (rubric.isPresent()) {
@@ -43,7 +43,7 @@ public class RubricController {
     }
 
 
-    @GetMapping(value = "/PayItem/Rubric/getRubricsOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Rubric/All/{idOrganism}")
     public List<Rubric> getRubricsOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Rubric> rubrics = rubricBusiness.getRubricsOfOrganism(idOrganism);
         if (rubrics.isEmpty()) {
@@ -53,7 +53,7 @@ public class RubricController {
 
     }
 
-    @GetMapping(value = "/PayItem/Rubric/getRubricsCreatedByUserOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Rubric/GetCreatedByUser/{idOrganism}")
     public List<Rubric> getRubricsCreatedByUserOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Rubric> rubrics = rubricBusiness.getRubricsOfOrganismCreatedByUser(idOrganism);
         if (rubrics.isEmpty()) {
@@ -63,7 +63,7 @@ public class RubricController {
 
     }
 
-    @GetMapping(value = "/PayItem/Rubric/getRubricsManagedByUserOfOrganism/{idOrganism}")
+    @GetMapping(value = "/PayItem/Rubric/GetManagedByUser/{idOrganism}")
     public List<Rubric> getRubricsManagedByUserOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Rubric> rubrics = rubricBusiness.getRubricsOfOrganismManagedByUser(idOrganism);
         if (rubrics.isEmpty()) {
@@ -73,7 +73,7 @@ public class RubricController {
 
     }
 
-    @GetMapping(value = "/PayItem/Rubric/getRubricsByCodeOfOrganism/{code}/{idOrganism}")
+    @GetMapping(value = "/PayItem/Rubric/GetByCode/{code}/{idOrganism}")
     public ResponseEntity<Rubric> getRubricsByCodeOfOrganism(@PathVariable("code") int code,
             @PathVariable("idOrganism") int idOrganism) {
         Optional<Rubric> rubric = rubricBusiness.getRubricOfOrganismByCode(idOrganism, code);
@@ -88,7 +88,7 @@ public class RubricController {
 
     }
 
-    @PostMapping(value = "/PayItem/Rubric/create")
+    @PostMapping(value = "/PayItem/Rubric/Create")
     public ResponseEntity<Rubric> createRubric(@RequestBody Rubric rubric) {
         try {
             Rubric rubric1 = rubricBusiness.createRubric(rubric);
@@ -99,7 +99,7 @@ public class RubricController {
 
     }
 
-    @PutMapping(value = "/PayItem/Rubric/update/{idRubric}")
+    @PutMapping(value = "/PayItem/Rubric/Update/{idRubric}")
     public ResponseEntity<Rubric> upDateRubric(@PathVariable("idRubric") int idRubric,
             @RequestBody Rubric rubric) {
 
@@ -122,7 +122,7 @@ public class RubricController {
 
     }
 
-    @DeleteMapping(value = "/PayItem/Rubric/delete/{idRubric}")
+    @DeleteMapping(value = "/PayItem/Rubric/Delete/{idRubric}")
 
     public ResponseEntity<Boolean> deleteRubric(@PathVariable int idRubric) {
 

@@ -17,7 +17,7 @@ public class PayItemController {
     @Autowired
     private PayItemBusiness payItemBusiness;
 
-    @PostMapping(value = "/PayItem/PayItem/initializeOrganism/{idOrganism}")
+    @PostMapping(value = "/PayItem/PayItem/InitializeOrganism/{idOrganism}")
     public ResponseEntity<Boolean> initializeOrganism(@PathVariable("idOrganism") int idOrganism) {
         boolean success = false;
         try {

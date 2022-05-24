@@ -28,7 +28,7 @@ public class VariableController {
     private String variableNotFound = "Variable not found";
     private String variableNotSaved = "Variable not saved";
 
-    @GetMapping(value = "/PayItem/Variable/getVariablesOfSalaried/{idSalaried}")
+    @GetMapping(value = "/PayItem/Variable/GetBySalaried/{idSalaried}")
     public List<Variable> getVariablesOfSalaried(@PathVariable("idSalaried") int idSalaried) {
         List<Variable> variables = variableBusiness.getVariablesOfSalaried(idSalaried);
         if (variables.isEmpty()) {
@@ -38,7 +38,7 @@ public class VariableController {
 
     }
 
-    @PostMapping(value = "/PayItem/Variable/create")
+    @PostMapping(value = "/PayItem/Variable/Create")
     public ResponseEntity<Variable> createVariable(@RequestBody Variable variable) {
         try {
             Variable variable1 = variableBusiness.createVariable(variable);
@@ -49,7 +49,7 @@ public class VariableController {
 
     }
 
-    @DeleteMapping(value = "/PayItem/Variable/delete/{idVariable}")
+    @DeleteMapping(value = "/PayItem/Variable/Delete/{idVariable}")
 
     public ResponseEntity<Boolean> deleteVariable(@PathVariable int idVariable) {
 
