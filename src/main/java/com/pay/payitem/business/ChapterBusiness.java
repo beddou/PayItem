@@ -45,21 +45,26 @@ public class ChapterBusiness {
     }
 
     public Chapter updateChapter(int id, Chapter chapter) {
-        Chapter chapter1 = chapterRepository.findById(id).get();
 
-        if (chapter.getCode() > 0)
-            chapter1.setCode(chapter.getCode());
-            
-        if (chapter.getDesign() != null && !chapter.getDesign().equals("")
-                && !chapter.getDesign().trim().equals(""))
+        Optional<Chapter> chapter1 = chapterRepository.findById(id);
+        Chapter chapter2 = new Chapter();
+        if (chapter1.isPresent()) {
+            chapter2 = chapter1.get();
+            if (chapter.getCode() > 0)
+                chapter2.setCode(chapter.getCode());
 
-            chapter1.setDesign(chapter.getDesign());
+            if (chapter.getDesign() != null && !chapter.getDesign().equals("")
+                    && !chapter.getDesign().trim().equals(""))
 
-        if (chapter.getDescription() != null && !chapter.getDescription().equals("")
-                && !chapter.getDescription().trim().equals(""))
+                chapter2.setDesign(chapter.getDesign());
 
-            chapter1.setDescription(chapter.getDescription());
-        return chapterRepository.save(chapter1);
+            if (chapter.getDescription() != null && !chapter.getDescription().equals("")
+                    && !chapter.getDescription().trim().equals(""))
+
+                chapter2.setDescription(chapter.getDescription());
+        }
+
+        return chapterRepository.save(chapter2);
 
     }
 

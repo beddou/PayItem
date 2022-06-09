@@ -53,23 +53,25 @@ public class ArticleBusiness {
         article.setSystemCreated(false);
         Article article1 = articleRepository.save(article);
         int id = article1.getChapter().getId();
-        Chapter chapter = chapterRepository.findById(id).get();
-        article1.setChapter(chapter);
-
+        chapterRepository.findById(id).ifPresent(article1::setChapter);
         return article1;
     }
 
     @Transactional
     public Article updateArticle(int id, Article article) {
-        Article article1 = articleRepository.findById(id).get();
+        Optional<Article> article1 = articleRepository.findById(id);
+        Article article2 = new Article();
+        if (article1.isPresent()) {
+            article2 = article1.get();
+            if (article.getCode() > 0)
+                article2.setCode(article.getCode());
+            if (article.getDesign() != null && !article.getDesign().equals("")
+                    && !article.getDesign().trim().equals(""))
 
-        if (article.getCode() > 0)
-            article1.setCode(article.getCode());
-        if (article.getDesign() != null && !article.getDesign().equals("") && !article.getDesign().trim().equals(""))
+                article2.setDesign(article.getDesign());
 
-            article1.setDesign(article.getDesign());
-
-        return articleRepository.save(article1);
+        }
+        return articleRepository.save(article2);
 
     }
 

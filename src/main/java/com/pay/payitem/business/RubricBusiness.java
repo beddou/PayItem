@@ -55,44 +55,51 @@ public class RubricBusiness {
         rubric.setSystemManaged(false);
         Rubric rubric1 = rubricRepository.save(rubric);
         int id = rubric1.getArticle().getId();
-        Article article = articleRepository.findById(id).get();
-        rubric1.setArticle(article);
+        articleRepository.findById(id).ifPresent(rubric1::setArticle);
+        
         return rubric1;
     }
 
     public Rubric updateRubric(int id, Rubric rubric) {
-        Rubric rubric1 = rubricRepository.findById(id).get();
 
-        if (rubric.getCode() > 0)
-            rubric1.setCode(rubric.getCode());
+        Rubric rubric1 = new Rubric();
 
-        if (rubric.getDesign() != null && !rubric.getDesign().equals("") && !rubric.getDesign().trim().equals(""))
-            rubric1.setDesign(rubric.getDesign());
+        Optional<Rubric> rubric2 = rubricRepository.findById(id);
+        if (rubric2.isPresent()) {
+            rubric1 = rubric2.get();
+            if (rubric.getCode() > 0)
+                rubric1.setCode(rubric.getCode());
 
-        if (rubric.isDeduction() != null)
-            rubric1.setDeduction(rubric.isDeduction());
+            if (rubric.getDesign() != null && !rubric.getDesign().equals("") && !rubric.getDesign().trim().equals(""))
+                rubric1.setDesign(rubric.getDesign());
 
-        if (rubric.isRetainedOfAbsence() != null)
-            rubric1.setRetainedOfAbsence(rubric.isRetainedOfAbsence());
+            if (rubric.isDeduction() != null)
+                rubric1.setDeduction(rubric.isDeduction());
 
-        if (rubric.isSubjectIRG() != null)
-            rubric1.setSubjectIRG(rubric.isSubjectIRG());
+            if (rubric.isRetainedOfAbsence() != null)
+                rubric1.setRetainedOfAbsence(rubric.isRetainedOfAbsence());
 
-        if (rubric.isSubjectSS() != null)
-            rubric1.setSubjectSS(rubric.isSubjectSS());
+            if (rubric.isSubjectIRG() != null)
+                rubric1.setSubjectIRG(rubric.isSubjectIRG());
 
-        if (rubric.getValueType() != null)
-            rubric1.setValueType(rubric.getValueType());
+            if (rubric.isSubjectSS() != null)
+                rubric1.setSubjectSS(rubric.isSubjectSS());
 
-        if (rubric.getMatrixColumnNumber() > 0)
-            rubric1.setMatrixColumnNumber(rubric.getMatrixColumnNumber());
+            if (rubric.getValueType() != null)
+                rubric1.setValueType(rubric.getValueType());
 
-        if (rubric.getArticle() != null) {
-            int idArticle = rubric.getArticle().getId();
-            if (idArticle > 0) {
-                Article article = articleRepository.findById(idArticle).get();
-                rubric1.setArticle(article);
+            if (rubric.getMatrixColumnNumber() > 0)
+                rubric1.setMatrixColumnNumber(rubric.getMatrixColumnNumber());
+
+            if (rubric.getArticle() != null) {
+                int idArticle = rubric.getArticle().getId();
+                if (idArticle > 0) {
+
+                    articleRepository.findById(idArticle).ifPresent(rubric1::setArticle);
+
+                }
             }
+
         }
 
         return rubricRepository.save(rubric1);

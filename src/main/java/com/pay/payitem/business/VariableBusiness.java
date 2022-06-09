@@ -2,14 +2,16 @@ package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import com.pay.payitem.model.Rubric;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.pay.payitem.dto.VariableDto;
 import com.pay.payitem.model.Variable;
 import com.pay.payitem.repository.RubricRepository;
 import com.pay.payitem.repository.VariableRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class VariableBusiness {
@@ -22,15 +24,23 @@ public class VariableBusiness {
         return variableRepository.findById(idVariable);
     }
 
-    public List<Variable> getVariablesOfSalaried(int idSalaried) {
-        return variableRepository.findBySalaried(idSalaried);
+    public List<VariableDto> getVariablesOfSalaried(int idSalaried) {
+        ModelMapper modelMapper = new ModelMapper();
+
+        return variableRepository.findBySalaried(idSalaried).stream()
+                .map(temp -> modelMapper.map(temp, VariableDto.class)
+
+                ).collect(Collectors.toList());
     }
 
     public Variable createVariable(Variable variable) {
         Variable variable1 = variableRepository.save(variable);
         int id = variable1.getRubric().getId();
-        Rubric rubric = rubricRepository.findById(id).get();
-        variable1.setRubric(rubric);
+
+        rubricRepository.findById(id).ifPresent(
+
+                variable1::setRubric);
+
         return variable1;
     }
 

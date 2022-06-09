@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.pay.payitem.business.VariableBusiness;
+import com.pay.payitem.dto.VariableDto;
 import com.pay.payitem.exception.EntityNotFoundException;
 import com.pay.payitem.exception.NoEntityAddedException;
 import com.pay.payitem.model.Variable;
@@ -29,8 +30,8 @@ public class VariableController {
     private String variableNotSaved = "Variable not saved";
 
     @GetMapping(value = "/PayItem/Variable/GetBySalaried/{idSalaried}")
-    public List<Variable> getVariablesOfSalaried(@PathVariable("idSalaried") int idSalaried) {
-        List<Variable> variables = variableBusiness.getVariablesOfSalaried(idSalaried);
+    public List<VariableDto> getVariablesOfSalaried(@PathVariable("idSalaried") int idSalaried) {
+        List<VariableDto> variables = variableBusiness.getVariablesOfSalaried(idSalaried);
         if (variables.isEmpty()) {
             throw new EntityNotFoundException(variableNotFound);
         } else
