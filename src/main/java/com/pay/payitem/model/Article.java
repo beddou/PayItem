@@ -42,6 +42,21 @@ public class Article {
     @Min(value = 1, message = "organism must be input")
     private int organism;
 
+    
+
+    public Article(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
+            boolean systemCreated, @NotNull Chapter chapter,
+            @Min(value = 1, message = "organism must be input") int organism) {
+        this.code = code;
+        this.design = design;
+        this.systemCreated = systemCreated;
+        this.chapter = chapter;
+        this.organism = organism;
+    }
+
+    public Article() {
+    }
+
     @Override
     public String toString() {
         return "Article [chapter=" + chapter + ", code=" + code + ", design=" + design + ", id=" + id + ", organism="

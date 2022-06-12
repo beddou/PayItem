@@ -3,16 +3,14 @@ package com.pay.payitem.business;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.pay.payitem.model.Article;
-import com.pay.payitem.model.Chapter;
 import com.pay.payitem.repository.ArticleRepository;
 import com.pay.payitem.repository.ChapterRepository;
 import com.pay.payitem.repository.RubricRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ArticleBusiness {

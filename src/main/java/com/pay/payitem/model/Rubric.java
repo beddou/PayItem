@@ -39,7 +39,6 @@ public class Rubric {
     @Enumerated(EnumType.STRING)
     private ValueType valueType;
 
-   
     @NotNull
     private Boolean deduction;
 
@@ -63,8 +62,22 @@ public class Rubric {
     @ManyToOne
     private Article article;
 
-    @Min(value = 1, message = "organism must be input")    
+    @Min(value = 1, message = "organism must be input")
     private int organism;
+
+    public Rubric(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
+            ValueType valueType, int matrixColumnNumber, Article article,
+            @Min(value = 1, message = "organism must be input") int organism) {
+        this.code = code;
+        this.design = design;
+        this.valueType = valueType;
+        this.matrixColumnNumber = matrixColumnNumber;
+        this.article = article;
+        this.organism = organism;
+    }
+
+    public Rubric() {
+    }
 
     public int getId() {
         return id;

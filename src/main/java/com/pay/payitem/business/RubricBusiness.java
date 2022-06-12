@@ -62,7 +62,7 @@ public class RubricBusiness {
 
     public Rubric updateRubric(int id, Rubric rubric) {
 
-        Rubric rubric1 = new Rubric();
+        Rubric rubric1 = new Rubric();       
 
         Optional<Rubric> rubric2 = rubricRepository.findById(id);
         if (rubric2.isPresent()) {

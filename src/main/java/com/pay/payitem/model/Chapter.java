@@ -33,6 +33,21 @@ public class Chapter {
     @Min(value = 1, message = "organism must be input")
     private int organism;
 
+    
+
+    public Chapter(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
+            String description, boolean systemCreated,
+            @Min(value = 1, message = "organism must be input") int organism) {
+        this.code = code;
+        this.design = design;
+        this.description = description;
+        this.systemCreated = systemCreated;
+        this.organism = organism;
+    }
+
+    public Chapter() {
+    }
+
     public int getId() {
         return id;
     }

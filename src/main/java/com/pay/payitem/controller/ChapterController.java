@@ -26,12 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChapterController {
     @Autowired
     private ChapterBusiness chapterBusiness;
+    private String chapterNotFound = "Chapter not found";
+    private String chapterNotSaved = "Chapter not saved";
 
     @GetMapping(value = "/PayItem/Chapter/All/{idOrganism}")
     public List<Chapter> getChaptersOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Chapter> chapters = chapterBusiness.getChaptersOfOrganism(idOrganism);
         if (chapters.isEmpty()) {
-            throw new EntityNotFoundException("organism not found");
+            throw new EntityNotFoundException(chapterNotFound);
         } else
             return chapters;
 
@@ -41,7 +43,7 @@ public class ChapterController {
     public List<Chapter> getChaptersCreatedByUserOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Chapter> chapters = chapterBusiness.getChaptersOfOrganismCreatedByUser(idOrganism);
         if (chapters.isEmpty()) {
-            throw new EntityNotFoundException("organism not found");
+            throw new EntityNotFoundException(chapterNotFound);
         } else
             return chapters;
 
@@ -56,7 +58,7 @@ public class ChapterController {
         }
 
         else {
-            throw new EntityNotFoundException("chapter not found");
+            throw new EntityNotFoundException(chapterNotFound);
 
         }
 
@@ -68,7 +70,7 @@ public class ChapterController {
             Chapter chapter1 = chapterBusiness.createChapter(chapter);
             return new ResponseEntity<>(chapter1, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new NoEntityAddedException("chapter not saved");
+            throw new NoEntityAddedException(chapterNotSaved);
         }
 
     }
@@ -86,11 +88,11 @@ public class ChapterController {
                 return new ResponseEntity<>(chapter2, HttpStatus.CREATED);
 
             } catch (Exception e) {
-                throw new NoEntityAddedException("entity not saved");
+                throw new NoEntityAddedException(chapterNotSaved);
             }
 
         } else {
-            throw new EntityNotFoundException("document introuvable");
+            throw new EntityNotFoundException(chapterNotFound);
 
         }
 
@@ -102,7 +104,7 @@ public class ChapterController {
 
         Optional<Chapter> chapter = chapterBusiness.getChapter(idChapter);
         if (!chapter.isPresent())
-            throw new EntityNotFoundException("entity introuvable");
+            throw new EntityNotFoundException(chapterNotFound);
 
         return new ResponseEntity<>(chapterBusiness.deleteChapter(idChapter), HttpStatus.OK);
 

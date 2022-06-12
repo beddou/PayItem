@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
     @Autowired
     private ArticleBusiness articleBusiness;
+    private String articleNotFound = "Article not found";
+    private String articleNotSaved = "Article not saved";
 
     @GetMapping(value = "/PayItem/Article/Get/{id}")
     public ResponseEntity<Article> getArticle(@PathVariable("id") int id) {
@@ -34,7 +36,7 @@ public class ArticleController {
         }
 
         else {
-            throw new EntityNotFoundException("Article not found");
+            throw new EntityNotFoundException(articleNotFound);
 
         }
 
@@ -45,7 +47,7 @@ public class ArticleController {
     public List<Article> getArticlesOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Article> articles = articleBusiness.getArticlesOfOrganism(idOrganism);
         if (articles.isEmpty()) {
-            throw new EntityNotFoundException("article not found");
+            throw new EntityNotFoundException(articleNotFound);
         } else
             return articles;
 
@@ -55,7 +57,7 @@ public class ArticleController {
     public List<Article> getArticlesCreatedByUserOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Article> articles = articleBusiness.getArticlesOfOrganismCreatedByUser(idOrganism);
         if (articles.isEmpty()) {
-            throw new EntityNotFoundException("article not found");
+            throw new EntityNotFoundException(articleNotFound);
         } else
             return articles;
 
@@ -70,7 +72,7 @@ public class ArticleController {
         }
 
         else {
-            throw new EntityNotFoundException("Article not found");
+            throw new EntityNotFoundException(articleNotFound);
 
         }
 
@@ -82,7 +84,7 @@ public class ArticleController {
             Article article1 = articleBusiness.createArticle(article);
             return new ResponseEntity<>(article1 , HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new NoEntityAddedException("Article not saved");
+            throw new NoEntityAddedException(articleNotSaved);
         }
 
     }
@@ -100,11 +102,11 @@ public class ArticleController {
                 return new ResponseEntity<>(article2, HttpStatus.CREATED);
 
             } catch (Exception e) {
-                throw new NoEntityAddedException("entity not saved");
+                throw new NoEntityAddedException(articleNotSaved);
             }
 
         } else {
-            throw new EntityNotFoundException("document introuvable");
+            throw new EntityNotFoundException(articleNotFound);
 
         }
 
@@ -116,7 +118,7 @@ public class ArticleController {
 
         Optional<Article> article =  articleBusiness.getArticle(idArticle);
         if (!article.isPresent())
-            throw new EntityNotFoundException("entity introuvable");
+            throw new EntityNotFoundException(articleNotFound);
 
         return new ResponseEntity<>( articleBusiness.deleteArticle(idArticle), HttpStatus.OK);
 
