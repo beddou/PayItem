@@ -4,11 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -21,7 +19,7 @@ import com.pay.payItem.model.tools.ValueType;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueRubric", columnNames = { "organism", "code" }),
-        @UniqueConstraint(name = "UniqueMatrixColumnNumber", columnNames = { "organism", "matrixColumnNumber" }) })
+        @UniqueConstraint(name = "UniqueMatrixColumnNumber", columnNames = { "organism", "matrixColumnNumber", "chapter_id" }) })
 public class Rubric {
 
     @Id
@@ -57,7 +55,7 @@ public class Rubric {
     @NotNull
     private Boolean retainedOfAbsence;
 
-    private int matrixColumnNumber;
+    private Integer matrixColumnNumber;
 
     @ManyToOne
     private Article article;
@@ -68,7 +66,7 @@ public class Rubric {
     @Min(value = 1, message = "organism must be input")
     private int organism;
 
-    public Rubric(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
+    /*public Rubric(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
             ValueType valueType, int matrixColumnNumber, Article article,
             @Min(value = 1, message = "organism must be input") int organism) {
         this.code = code;
@@ -77,7 +75,31 @@ public class Rubric {
         this.matrixColumnNumber = matrixColumnNumber;
         this.article = article;
         this.organism = organism;
+    }*/
+
+    
+
+    public Rubric(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
+            ValueType valueType, @NotNull Boolean deduction, boolean systemCreated, boolean systemManaged,
+            @NotNull Boolean subjectIRG, @NotNull Boolean subjectSS, @NotNull Boolean retainedOfAbsence,
+            Integer matrixColumnNumber, Article article, Chapter chapter,
+            @Min(value = 1, message = "organism must be input") int organism) {
+        this.code = code;
+        this.design = design;
+        this.valueType = valueType;
+        this.deduction = deduction;
+        this.systemCreated = systemCreated;
+        this.systemManaged = systemManaged;
+        this.subjectIRG = subjectIRG;
+        this.subjectSS = subjectSS;
+        this.retainedOfAbsence = retainedOfAbsence;
+        this.matrixColumnNumber = matrixColumnNumber;
+        this.article = article;
+        this.chapter = chapter;
+        this.organism = organism;
     }
+
+
 
     public Rubric() {
     }
@@ -171,11 +193,11 @@ public class Rubric {
         this.retainedOfAbsence = retainedOfAbsence;
     }
 
-    public int getMatrixColumnNumber() {
+    public Integer getMatrixColumnNumber() {
         return matrixColumnNumber;
     }
 
-    public void setMatrixColumnNumber(int matrixColumnNumber) {
+    public void setMatrixColumnNumber(Integer matrixColumnNumber) {
         this.matrixColumnNumber = matrixColumnNumber;
     }
 
