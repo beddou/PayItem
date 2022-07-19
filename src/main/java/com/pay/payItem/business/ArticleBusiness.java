@@ -79,11 +79,18 @@ public class ArticleBusiness {
         Optional<Article> article = articleRepository.findById(idArticle);
         if (!article.isPresent())
             return false;
+
         if (article.get().isSystemCreated())
             return false;
+
         if (!rubricRepository.existsByArticle_id(idArticle)) {
-            articleRepository.deleteById(idArticle);
-            return true;
+            try {
+                articleRepository.deleteById(idArticle);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
         } else
             return false;
 

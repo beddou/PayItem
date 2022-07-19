@@ -126,8 +126,13 @@ public class RubricBusiness {
         if (rubric.get().isSystemCreated())
             return false;
         if (!variableRepository.existsByRubric_id(idRubric)) {
-            rubricRepository.deleteById(idRubric);
-            return true;
+            try {
+                rubricRepository.deleteById(idRubric);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
         } else {
             return false;
         }

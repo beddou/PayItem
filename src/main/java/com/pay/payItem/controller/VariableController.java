@@ -52,11 +52,7 @@ public class VariableController {
 
     @DeleteMapping(value = "/PayItem/Variable/Delete/{idVariable}")
 
-    public ResponseEntity<Boolean> deleteVariable(@PathVariable int idVariable) {
-
-        Optional<Variable> variable = variableBusiness.getVariable(idVariable);
-        if (!variable.isPresent())
-            throw new EntityNotFoundException(variableNotFound);
+    public ResponseEntity<Boolean> deleteVariable(@PathVariable int idVariable) {        
 
         return new ResponseEntity<>(variableBusiness.deleteVariable(idVariable), HttpStatus.OK);
 

@@ -76,8 +76,13 @@ public class ChapterBusiness {
         if (chapter.get().isSystemCreated())
             return false;
         if (!articleRepository.existsByChapter_id(idChapter)) {
-            chapterRepository.deleteById(idChapter);
-            return true;
+            try {
+                chapterRepository.deleteById(idChapter);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
         } else
             return false;
 
