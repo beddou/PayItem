@@ -75,6 +75,12 @@ public class ArticleBusiness {
 
     @Transactional
     public boolean deleteArticle(int idArticle) {
+
+        Optional<Article> article = articleRepository.findById(idArticle);
+        if (!article.isPresent())
+            return false;
+        if (article.get().isSystemCreated())
+            return false;
         if (!rubricRepository.existsByArticle_id(idArticle)) {
             articleRepository.deleteById(idArticle);
             return true;

@@ -69,6 +69,12 @@ public class ChapterBusiness {
     }
 
     public boolean deleteChapter(int idChapter) {
+
+        Optional<Chapter> chapter = chapterRepository.findById(idChapter);
+        if (!chapter.isPresent())
+            return false;
+        if (chapter.get().isSystemCreated())
+            return false;
         if (!articleRepository.existsByChapter_id(idChapter)) {
             chapterRepository.deleteById(idChapter);
             return true;

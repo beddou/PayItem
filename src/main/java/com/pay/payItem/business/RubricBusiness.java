@@ -61,13 +61,13 @@ public class RubricBusiness {
         articleRepository.findById(idArticle).ifPresent(rubric1::setArticle);
         int idChapter = rubric1.getChapter().getId();
         chapterRepository.findById(idChapter).ifPresent(rubric1::setChapter);
-        
+
         return rubric1;
     }
 
     public Rubric updateRubric(int id, Rubric rubric) {
 
-        Rubric rubric1 = new Rubric();       
+        Rubric rubric1 = new Rubric();
 
         Optional<Rubric> rubric2 = rubricRepository.findById(id);
         if (rubric2.isPresent()) {
@@ -104,7 +104,7 @@ public class RubricBusiness {
 
                 }
             }
-            if (rubric.getChapter() !=null) {
+            if (rubric.getChapter() != null) {
                 int idChapter = rubric.getChapter().getId();
                 if (idChapter > 0) {
                     chapterRepository.findById(idChapter).ifPresent(rubric1::setChapter);
@@ -118,12 +118,19 @@ public class RubricBusiness {
     }
 
     public boolean deleteRubric(int idRubric) {
+
+        Optional<Rubric> rubric = rubricRepository.findById(idRubric);
+
+        if (!rubric.isPresent())
+            return false;
+        if (rubric.get().isSystemCreated())
+            return false;
         if (!variableRepository.existsByRubric_id(idRubric)) {
             rubricRepository.deleteById(idRubric);
             return true;
-        } else
+        } else {
             return false;
-
+        }
     }
 
 }

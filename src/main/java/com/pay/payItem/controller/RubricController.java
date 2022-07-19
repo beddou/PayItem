@@ -25,7 +25,7 @@ import com.pay.payItem.model.Rubric;
 public class RubricController {
     @Autowired
     private RubricBusiness rubricBusiness;
-    private String rubricNotFound = "rubric not found"; 
+    private String rubricNotFound = "rubric not found";
     private String rubricNotSaved = "rubric not saved";
 
     @GetMapping(value = "/PayItem/Rubric/Get/{id}")
@@ -41,7 +41,6 @@ public class RubricController {
         }
 
     }
-
 
     @GetMapping(value = "/PayItem/Rubric/All/{idOrganism}")
     public List<Rubric> getRubricsOfOrganism(@PathVariable("idOrganism") int idOrganism) {
@@ -92,7 +91,7 @@ public class RubricController {
     public ResponseEntity<Rubric> createRubric(@RequestBody Rubric rubric) {
         try {
             Rubric rubric1 = rubricBusiness.createRubric(rubric);
-            return new ResponseEntity<>(rubric1 , HttpStatus.CREATED);
+            return new ResponseEntity<>(rubric1, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new NoEntityAddedException(rubricNotSaved);
         }
@@ -126,11 +125,8 @@ public class RubricController {
 
     public ResponseEntity<Boolean> deleteRubric(@PathVariable int idRubric) {
 
-        Optional<Rubric> rubric =  rubricBusiness.getRubric(idRubric);
-        if (!rubric.isPresent())
-            throw new EntityNotFoundException(rubricNotFound);
-
-        return new ResponseEntity<>( rubricBusiness.deleteRubric(idRubric), HttpStatus.OK);
+        
+        return new ResponseEntity<>(rubricBusiness.deleteRubric(idRubric), HttpStatus.OK);
 
     }
 

@@ -1,6 +1,5 @@
 package com.pay.payItem.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -101,10 +100,6 @@ public class ChapterController {
     @DeleteMapping(value = "/PayItem/Chapter/Delete/{idChapter}")
 
     public ResponseEntity<Boolean> deleteChapter(@PathVariable("idChapter") int idChapter) {
-
-        Optional<Chapter> chapter = chapterBusiness.getChapter(idChapter);
-        if (!chapter.isPresent())
-            throw new EntityNotFoundException(chapterNotFound);
 
         return new ResponseEntity<>(chapterBusiness.deleteChapter(idChapter), HttpStatus.OK);
 

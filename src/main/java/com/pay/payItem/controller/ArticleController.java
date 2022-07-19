@@ -42,7 +42,6 @@ public class ArticleController {
 
     }
 
-
     @GetMapping(value = "/PayItem/Article/All/{idOrganism}")
     public List<Article> getArticlesOfOrganism(@PathVariable("idOrganism") int idOrganism) {
         List<Article> articles = articleBusiness.getArticlesOfOrganism(idOrganism);
@@ -82,7 +81,7 @@ public class ArticleController {
     public ResponseEntity<Article> createArticle(@RequestBody Article article) {
         try {
             Article article1 = articleBusiness.createArticle(article);
-            return new ResponseEntity<>(article1 , HttpStatus.CREATED);
+            return new ResponseEntity<>(article1, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new NoEntityAddedException(articleNotSaved);
         }
@@ -116,11 +115,7 @@ public class ArticleController {
 
     public ResponseEntity<Boolean> deleteArticle(@PathVariable("idArticle") int idArticle) {
 
-        Optional<Article> article =  articleBusiness.getArticle(idArticle);
-        if (!article.isPresent())
-            throw new EntityNotFoundException(articleNotFound);
-
-        return new ResponseEntity<>( articleBusiness.deleteArticle(idArticle), HttpStatus.OK);
+        return new ResponseEntity<>(articleBusiness.deleteArticle(idArticle), HttpStatus.OK);
 
     }
 
