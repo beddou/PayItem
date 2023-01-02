@@ -1,4 +1,4 @@
-package com.pay.payItem.model;
+package com.pay.payitem.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

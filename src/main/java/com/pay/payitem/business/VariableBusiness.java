@@ -1,4 +1,4 @@
-package com.pay.payItem.business;
+package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,10 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pay.payItem.dto.VariableDto;
-import com.pay.payItem.model.Variable;
-import com.pay.payItem.repository.RubricRepository;
-import com.pay.payItem.repository.VariableRepository;
+import com.pay.payitem.dto.VariableDto;
+import com.pay.payitem.model.Variable;
+import com.pay.payitem.repository.RubricRepository;
+import com.pay.payitem.repository.VariableRepository;
 
 @Service
 public class VariableBusiness {

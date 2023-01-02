@@ -1,4 +1,4 @@
-package com.pay.payItem;
+package com.pay.payitem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

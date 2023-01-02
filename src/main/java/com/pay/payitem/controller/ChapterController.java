@@ -1,4 +1,4 @@
-package com.pay.payItem.controller;
+package com.pay.payitem.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pay.payItem.business.ChapterBusiness;
-import com.pay.payItem.exception.EntityNotFoundException;
-import com.pay.payItem.exception.NoEntityAddedException;
-import com.pay.payItem.model.Chapter;
+import com.pay.payitem.business.ChapterBusiness;
+import com.pay.payitem.exception.EntityNotFoundException;
+import com.pay.payitem.exception.NoEntityAddedException;
+import com.pay.payitem.model.Chapter;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -34,7 +34,7 @@ public class ChapterController {
         if (chapters.isEmpty()) {
             throw new EntityNotFoundException(chapterNotFound);
         } else
-            return chapters;
+            return chapters ;
 
     }
 
@@ -46,22 +46,7 @@ public class ChapterController {
         } else
             return chapters;
 
-    }
-
-    @GetMapping(value = "/PayItem/Chapter/GetByCode/{code}/{idOrganism}")
-    public ResponseEntity<Chapter> getChaptersByCodeOfOrganism(@PathVariable("code") int code,
-            @PathVariable("idOrganism") int idOrganism) {
-        Optional<Chapter> chapter = chapterBusiness.getChaptersOfOrganismByCode(code, idOrganism);
-        if (chapter.isPresent()) {
-            return new ResponseEntity<>(chapter.get(), HttpStatus.OK);
-        }
-
-        else {
-            throw new EntityNotFoundException(chapterNotFound);
-
-        }
-
-    }
+    }    
 
     @PostMapping(value = "/PayItem/Chapter/Create")
     public ResponseEntity<Chapter> createChapter(@RequestBody Chapter chapter) {

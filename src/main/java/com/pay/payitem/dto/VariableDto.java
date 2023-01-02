@@ -1,6 +1,6 @@
-package com.pay.payItem.dto;
+package com.pay.payitem.dto;
 
-import com.pay.payItem.model.tools.ValueType;
+import com.pay.payitem.model.tools.ValueType;
 
 public class VariableDto {
 

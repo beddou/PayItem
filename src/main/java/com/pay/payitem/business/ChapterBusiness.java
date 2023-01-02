@@ -1,4 +1,4 @@
-package com.pay.payItem.business;
+package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pay.payItem.model.Chapter;
-import com.pay.payItem.repository.ArticleRepository;
-import com.pay.payItem.repository.ChapterRepository;
+import com.pay.payitem.model.Chapter;
+import com.pay.payitem.repository.ArticleRepository;
+import com.pay.payitem.repository.ChapterRepository;
 
 @Service
 public class ChapterBusiness {
@@ -28,16 +28,7 @@ public class ChapterBusiness {
 
     public List<Chapter> getChaptersOfOrganismCreatedByUser(int idOrganism) {
         return chapterRepository.findByOrganismAndSystemCreated(idOrganism, false);
-    }
-
-    public Optional<Chapter> getChaptersOfOrganismByCode(int code, int idOrganism) {
-        List<Chapter> list = chapterRepository.findByOrganismAndCode(idOrganism, code);
-        if (!list.isEmpty()) {
-            return Optional.of(list.get(0));
-        } else
-            return Optional.empty();
-
-    }
+    }    
 
     public Chapter createChapter(Chapter chapter) {
         chapter.setSystemCreated(false);
@@ -50,8 +41,7 @@ public class ChapterBusiness {
         Chapter chapter2 = new Chapter();
         if (chapter1.isPresent()) {
             chapter2 = chapter1.get();
-            if (chapter.getCode() > 0)
-                chapter2.setCode(chapter.getCode());
+            
 
             if (chapter.getDesign() != null && !chapter.getDesign().equals("")
                     && !chapter.getDesign().trim().equals(""))

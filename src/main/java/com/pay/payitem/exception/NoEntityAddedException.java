@@ -1,4 +1,4 @@
-package com.pay.payItem.exception;
+package com.pay.payitem.exception;
 
 
 import org.springframework.http.HttpStatus;

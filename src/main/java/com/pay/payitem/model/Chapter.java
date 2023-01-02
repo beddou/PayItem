@@ -1,4 +1,4 @@
-package com.pay.payItem.model;
+package com.pay.payitem.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,14 +13,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueChapter", columnNames = { "organism", "code" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueChapter", columnNames = { "organism", "design" }) })
 public class Chapter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @NotNull
-    private int code;
 
     @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank
     private String design;
@@ -35,10 +32,10 @@ public class Chapter {
 
     
 
-    public Chapter(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
+    public Chapter( @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
             String description, boolean systemCreated,
             @Min(value = 1, message = "organism must be input") int organism) {
-        this.code = code;
+        
         this.design = design;
         this.description = description;
         this.systemCreated = systemCreated;
@@ -54,14 +51,6 @@ public class Chapter {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 
     public String getDesign() {

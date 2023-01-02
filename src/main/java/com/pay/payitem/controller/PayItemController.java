@@ -1,4 +1,4 @@
-package com.pay.payItem.controller;
+package com.pay.payitem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pay.payItem.business.PayItemBusiness;
-import com.pay.payItem.exception.NoEntityAddedException;
+import com.pay.payitem.business.PayItemBusiness;
+import com.pay.payitem.exception.NoEntityAddedException;
 
 @CrossOrigin(origins = "*")
 @RestController

@@ -1,4 +1,4 @@
-package com.pay.payItem.business;
+package com.pay.payitem.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,12 +7,12 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pay.payItem.model.Article;
-import com.pay.payItem.model.Rubric;
-import com.pay.payItem.repository.ArticleRepository;
-import com.pay.payItem.repository.ChapterRepository;
-import com.pay.payItem.repository.RubricRepository;
-import com.pay.payItem.repository.VariableRepository;
+import com.pay.payitem.model.Article;
+import com.pay.payitem.model.Rubric;
+import com.pay.payitem.repository.ArticleRepository;
+import com.pay.payitem.repository.ChapterRepository;
+import com.pay.payitem.repository.RubricRepository;
+import com.pay.payitem.repository.VariableRepository;
 
 @Service
 public class RubricBusiness {

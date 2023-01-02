@@ -1,11 +1,11 @@
-package com.pay.payItem.repository;
+package com.pay.payitem.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pay.payItem.model.Variable;
+import com.pay.payitem.model.Variable;
 
 @Repository
 public interface VariableRepository extends JpaRepository<Variable, Integer>{

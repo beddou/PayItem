@@ -1,4 +1,4 @@
-package com.pay.payItem.model;
+package com.pay.payitem.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,11 +15,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.pay.payItem.model.tools.ValueType;
+import com.pay.payitem.model.tools.ValueType;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueRubric", columnNames = { "organism", "code" }),
-        @UniqueConstraint(name = "UniqueMatrixColumnNumber", columnNames = { "organism", "matrixColumnNumber", "chapter_id" }) })
+        @UniqueConstraint(name = "UniqueMatrixColumnNumber", columnNames = { "organism", "matrixColumnNumber",
+                "chapter_id" }) })
 public class Rubric {
 
     @Id
@@ -66,18 +67,20 @@ public class Rubric {
     @Min(value = 1, message = "organism must be input")
     private int organism;
 
-    /*public Rubric(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
-            ValueType valueType, int matrixColumnNumber, Article article,
-            @Min(value = 1, message = "organism must be input") int organism) {
-        this.code = code;
-        this.design = design;
-        this.valueType = valueType;
-        this.matrixColumnNumber = matrixColumnNumber;
-        this.article = article;
-        this.organism = organism;
-    }*/
-
-    
+    /*
+     * public Rubric(@NotNull int code, @NotNull(message =
+     * "Name cannot be null") @NotEmpty @NotBlank String design,
+     * ValueType valueType, int matrixColumnNumber, Article article,
+     * 
+     * @Min(value = 1, message = "organism must be input") int organism) {
+     * this.code = code;
+     * this.design = design;
+     * this.valueType = valueType;
+     * this.matrixColumnNumber = matrixColumnNumber;
+     * this.article = article;
+     * this.organism = organism;
+     * }
+     */
 
     public Rubric(@NotNull int code, @NotNull(message = "Name cannot be null") @NotEmpty @NotBlank String design,
             ValueType valueType, @NotNull Boolean deduction, boolean systemCreated, boolean systemManaged,
@@ -98,8 +101,6 @@ public class Rubric {
         this.chapter = chapter;
         this.organism = organism;
     }
-
-
 
     public Rubric() {
     }
@@ -224,7 +225,5 @@ public class Rubric {
     public void setChapter(Chapter chapter) {
         this.chapter = chapter;
     }
-
-    
 
 }

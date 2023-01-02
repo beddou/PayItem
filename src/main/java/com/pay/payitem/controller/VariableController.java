@@ -1,4 +1,4 @@
-package com.pay.payItem.controller;
+package com.pay.payitem.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pay.payItem.business.VariableBusiness;
-import com.pay.payItem.dto.VariableDto;
-import com.pay.payItem.exception.EntityNotFoundException;
-import com.pay.payItem.exception.NoEntityAddedException;
-import com.pay.payItem.model.Variable;
+import com.pay.payitem.business.VariableBusiness;
+import com.pay.payitem.dto.VariableDto;
+import com.pay.payitem.exception.EntityNotFoundException;
+import com.pay.payitem.exception.NoEntityAddedException;
+import com.pay.payitem.model.Variable;
 
 @CrossOrigin(origins = "*")
 @RestController
