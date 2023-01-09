@@ -28,15 +28,15 @@ public class PayItemBusiness {
 
        try {
         /* Création des chapitres */
-        Chapter chapter3111 = new Chapter(1, "31-11",
+        Chapter chapter3111 = new Chapter( "31-11",
                 "rémunération principale", true, idOrganism);
         chapterRepository.save(chapter3111);
 
-        Chapter chapter3112 = new Chapter(2, "31-12",
+        Chapter chapter3112 = new Chapter( "31-12",
                 "indemnités", true, idOrganism);
         chapterRepository.save(chapter3112);
 
-        Chapter chapter3311 = new Chapter(3, "33-11",
+        Chapter chapter3311 = new Chapter( "33-11",
                 "allocations familiales", true, idOrganism);
         chapterRepository.save(chapter3311);
 
