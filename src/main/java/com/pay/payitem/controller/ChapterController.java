@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pay.payitem.business.ChapterBusiness;
 import com.pay.payitem.exception.EntityNotFoundException;
 import com.pay.payitem.exception.NoEntityAddedException;
+import com.pay.payitem.exception.NoEntityDeletedException;
 import com.pay.payitem.model.Chapter;
 
 @CrossOrigin(origins = "*")
@@ -27,6 +28,7 @@ public class ChapterController {
     private ChapterBusiness chapterBusiness;
     private String chapterNotFound = "Chapter not found";
     private String chapterNotSaved = "Chapter not saved";
+    private String chapterNotDelete = "Chapter not deleted";
 
     @GetMapping(value = "/PayItem/Chapter/All/{idOrganism}")
     public List<Chapter> getChaptersOfOrganism(@PathVariable("idOrganism") int idOrganism) {
@@ -34,7 +36,7 @@ public class ChapterController {
         if (chapters.isEmpty()) {
             throw new EntityNotFoundException(chapterNotFound);
         } else
-            return chapters ;
+            return chapters;
 
     }
 
@@ -46,7 +48,7 @@ public class ChapterController {
         } else
             return chapters;
 
-    }    
+    }
 
     @PostMapping(value = "/PayItem/Chapter/Create")
     public ResponseEntity<Chapter> createChapter(@RequestBody Chapter chapter) {
@@ -86,7 +88,10 @@ public class ChapterController {
 
     public ResponseEntity<Boolean> deleteChapter(@PathVariable("idChapter") int idChapter) {
 
-        return new ResponseEntity<>(chapterBusiness.deleteChapter(idChapter), HttpStatus.OK);
+        if (chapterBusiness.deleteChapter(idChapter))
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        else
+            throw new NoEntityDeletedException(chapterNotDelete);
 
     }
 

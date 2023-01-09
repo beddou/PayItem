@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pay.payitem.exception.EntityNotFoundException;
+import com.pay.payitem.exception.NoEntityAddedException;
 import com.pay.payitem.model.Chapter;
 import com.pay.payitem.repository.ArticleRepository;
 import com.pay.payitem.repository.ChapterRepository;
@@ -28,7 +30,7 @@ public class ChapterBusiness {
 
     public List<Chapter> getChaptersOfOrganismCreatedByUser(int idOrganism) {
         return chapterRepository.findByOrganismAndSystemCreated(idOrganism, false);
-    }    
+    }
 
     public Chapter createChapter(Chapter chapter) {
         chapter.setSystemCreated(false);
@@ -38,21 +40,23 @@ public class ChapterBusiness {
     public Chapter updateChapter(int id, Chapter chapter) {
 
         Optional<Chapter> chapter1 = chapterRepository.findById(id);
-        Chapter chapter2 = new Chapter();
-        if (chapter1.isPresent()) {
-            chapter2 = chapter1.get();
-            
 
-            if (chapter.getDesign() != null && !chapter.getDesign().equals("")
-                    && !chapter.getDesign().trim().equals(""))
+        if (!chapter1.isPresent())
+            throw new EntityNotFoundException("chapter Not Found");
+        if (chapter1.get().isSystemCreated())
+            throw new NoEntityAddedException("chapter Not Saved");
 
-                chapter2.setDesign(chapter.getDesign());
+        Chapter chapter2 = chapter1.get();
 
-            if (chapter.getDescription() != null && !chapter.getDescription().equals("")
-                    && !chapter.getDescription().trim().equals(""))
+        if (chapter.getDesign() != null && !chapter.getDesign().equals("")
+                && !chapter.getDesign().trim().equals(""))
 
-                chapter2.setDescription(chapter.getDescription());
-        }
+            chapter2.setDesign(chapter.getDesign());
+
+        if (chapter.getDescription() != null && !chapter.getDescription().equals("")
+                && !chapter.getDescription().trim().equals(""))
+
+            chapter2.setDescription(chapter.getDescription());
 
         return chapterRepository.save(chapter2);
 
