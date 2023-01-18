@@ -27,8 +27,9 @@ public class ChapterController {
     @Autowired
     private ChapterBusiness chapterBusiness;
     private String chapterNotFound = "Chapter not found";
-    private String chapterNotSaved = "Chapter not saved";
-    private String chapterNotDelete = "Chapter not deleted";
+    private String chapterNotAdded = "Chapter not added";
+    private String chapterNotDeleted = "Chapter not deleted";
+    private String chapterNotUpdated = "Chapter not updated";
 
     @GetMapping(value = "/PayItem/Chapter/All/{idOrganism}")
     public List<Chapter> getChaptersOfOrganism(@PathVariable("idOrganism") int idOrganism) {
@@ -56,7 +57,7 @@ public class ChapterController {
             Chapter chapter1 = chapterBusiness.createChapter(chapter);
             return new ResponseEntity<>(chapter1, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new NoEntityAddedException(chapterNotSaved);
+            throw new NoEntityAddedException(chapterNotAdded);
         }
 
     }
@@ -74,7 +75,7 @@ public class ChapterController {
                 return new ResponseEntity<>(chapter2, HttpStatus.CREATED);
 
             } catch (Exception e) {
-                throw new NoEntityAddedException(chapterNotSaved);
+                throw new NoEntityAddedException(chapterNotUpdated);
             }
 
         } else {
@@ -91,7 +92,7 @@ public class ChapterController {
         if (chapterBusiness.deleteChapter(idChapter))
             return new ResponseEntity<>(true, HttpStatus.OK);
         else
-            throw new NoEntityDeletedException(chapterNotDelete);
+            throw new NoEntityDeletedException(chapterNotDeleted);
 
     }
 

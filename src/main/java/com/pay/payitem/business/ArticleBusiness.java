@@ -61,12 +61,14 @@ public class ArticleBusiness {
         Article article2 = new Article();
         if (article1.isPresent()) {
             article2 = article1.get();
+            article2.setChapter(article.getChapter());
             if (article.getCode() > 0)
                 article2.setCode(article.getCode());
             if (article.getDesign() != null && !article.getDesign().equals("")
                     && !article.getDesign().trim().equals(""))
 
                 article2.setDesign(article.getDesign());
+
 
         }
         return articleRepository.save(article2);

@@ -42,9 +42,9 @@ public class ChapterBusiness {
         Optional<Chapter> chapter1 = chapterRepository.findById(id);
 
         if (!chapter1.isPresent())
-            throw new EntityNotFoundException("chapter Not Found");
+            throw new EntityNotFoundException("chapter not found");
         if (chapter1.get().isSystemCreated())
-            throw new NoEntityAddedException("chapter Not Saved");
+            throw new NoEntityAddedException("chapter not updated");
 
         Chapter chapter2 = chapter1.get();
 

@@ -16,7 +16,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueArticle", columnNames = { "organism", "code" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueCode", columnNames = { "organism", "code" }),
+@UniqueConstraint(name = "UniqueDesign", columnNames = { "organism", "design" }) })
 public class Article {
 
     @Id

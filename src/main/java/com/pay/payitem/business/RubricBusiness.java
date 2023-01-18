@@ -56,11 +56,30 @@ public class RubricBusiness {
     public Rubric createRubric(Rubric rubric) {
         rubric.setSystemCreated(false);
         rubric.setSystemManaged(false);
+
+         if (rubric.isDeduction() == null)
+            rubric.setDeduction(false);
+
+        if (rubric.isRetainedOfAbsence() == null)
+            rubric.setRetainedOfAbsence(false);
+
+        if (rubric.isSubjectIRG() == null)
+            rubric.setSubjectIRG(false);
+
+        if (rubric.isSubjectSS() == null)
+            rubric.setSubjectSS(false);
+
         Rubric rubric1 = rubricRepository.save(rubric);
-        int idArticle = rubric1.getArticle().getId();
-        articleRepository.findById(idArticle).ifPresent(rubric1::setArticle);
-        int idChapter = rubric1.getChapter().getId();
-        chapterRepository.findById(idChapter).ifPresent(rubric1::setChapter);
+        if (rubric1.getArticle()!=null){
+            int idArticle = rubric1.getArticle().getId();
+            articleRepository.findById(idArticle).ifPresent(rubric1::setArticle);
+        }
+        
+        if (rubric1.getChapter()!=null){
+            int idChapter = rubric1.getChapter().getId();
+            chapterRepository.findById(idChapter).ifPresent(rubric1::setChapter);
+        }
+        
 
         return rubric1;
     }
