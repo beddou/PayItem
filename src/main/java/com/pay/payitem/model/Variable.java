@@ -25,7 +25,7 @@ public class Variable {
     @NotNull
     private Rubric rubric;
 
-    @Min(value = 1, message = "organism must be input")
+    @Min(value = 1, message = "salaried must be input")
     private int salaried;
 
     public int getId() {
