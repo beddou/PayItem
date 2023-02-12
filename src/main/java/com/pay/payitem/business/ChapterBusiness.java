@@ -39,26 +39,8 @@ public class ChapterBusiness {
 
     public Chapter updateChapter(int id, Chapter chapter) {
 
-        Optional<Chapter> chapter1 = chapterRepository.findById(id);
-
-        if (!chapter1.isPresent())
-            throw new EntityNotFoundException("chapter not found");
-        if (chapter1.get().isSystemCreated())
-            throw new NoEntityAddedException("chapter not updated");
-
-        Chapter chapter2 = chapter1.get();
-
-        if (chapter.getDesign() != null && !chapter.getDesign().equals("")
-                && !chapter.getDesign().trim().equals(""))
-
-            chapter2.setDesign(chapter.getDesign());
-
-        if (chapter.getDescription() != null && !chapter.getDescription().equals("")
-                && !chapter.getDescription().trim().equals(""))
-
-            chapter2.setDescription(chapter.getDescription());
-
-        return chapterRepository.save(chapter2);
+        chapter.setId(id);
+        return chapterRepository.save(chapter);
 
     }
 

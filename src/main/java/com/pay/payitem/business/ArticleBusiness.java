@@ -57,21 +57,9 @@ public class ArticleBusiness {
 
     @Transactional
     public Article updateArticle(int id, Article article) {
-        Optional<Article> article1 = articleRepository.findById(id);
-        Article article2 = new Article();
-        if (article1.isPresent()) {
-            article2 = article1.get();
-            article2.setChapter(article.getChapter());
-            if (article.getCode() > 0)
-                article2.setCode(article.getCode());
-            if (article.getDesign() != null && !article.getDesign().equals("")
-                    && !article.getDesign().trim().equals(""))
 
-                article2.setDesign(article.getDesign());
-
-
-        }
-        return articleRepository.save(article2);
+        article.setId(id);
+        return articleRepository.save(article);
 
     }
 

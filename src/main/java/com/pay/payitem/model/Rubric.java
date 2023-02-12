@@ -20,7 +20,7 @@ import com.pay.payitem.model.tools.ValueType;
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueRubric", columnNames = { "organism", "code" }),
         @UniqueConstraint(name = "UniqueMatrixColumnNumber", columnNames = { "organism", "matrixColumnNumber",
-                "chapter_id" }) })
+                "matrixFeuillet" }) })
 public class Rubric {
 
     @Id
@@ -55,6 +55,8 @@ public class Rubric {
 
     @NotNull
     private Boolean retainedOfAbsence;
+
+    private Integer matrixFeuillet;    
 
     private Integer matrixColumnNumber;
 
@@ -192,6 +194,14 @@ public class Rubric {
 
     public void setRetainedOfAbsence(Boolean retainedOfAbsence) {
         this.retainedOfAbsence = retainedOfAbsence;
+    }
+
+    public Integer getMatrixFeuillet() {
+        return matrixFeuillet;
+    }
+
+    public void setMatrixFeuillet(Integer matrixFeuillet) {
+        this.matrixFeuillet = matrixFeuillet;
     }
 
     public Integer getMatrixColumnNumber() {
